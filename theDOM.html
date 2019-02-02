@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        #rectangleWrapper {
+            padding: 50px 50px 0px 50px;
+        }
+
+        .rectangle {
+            width: 100px;
+            height: 100px;
+            margin: 30px 30px 0px 30px;
+        }
+
+        .rectangleContainer {
+            float: left;
+            text-align: center;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <h1>The DOM Exercise</h1>
+    <h2>Exercise in class Keeping Up With the Javascripts on Pirple.com</h2>
+    <div id="rectangleWrapper">
+
+    </div>
+</body>
+<script>
+    console.log('Here are the rectangle IDs');
+
+    let wrapper = document.getElementById('rectangleWrapper');  // rectangle wrapper
+    let colors = ['2062CF', '8395B4', '52E88B', 'E1E852', 'CB9C14', 'F1A828', 'EC5C4D', 'ED76ED', 'A668CE', '52454C'];
+
+    // add 10 rectangles
+    for (let i = 0; i < 10; i++) {
+        let rectangleContainer = document.createElement('div'); // create rectangle and text color container
+        rectangleContainer.setAttribute('class', 'rectangleContainer');   // add class
+
+        let rectangle = document.createElement('div');  // create rectangle
+        let rectangleId = `rectangle_${i + 1}`;// create unique rectangle id
+        rectangle.setAttribute('id', rectangleId);     // add id
+        rectangle.setAttribute('class', 'rectangle');   // add class
+        rectangle.setAttribute('style', `background:#${colors[i]}`);    // add unique background color
+        rectangleContainer.appendChild(rectangle);  // add rectangle to container
+
+        let rectangleColor = document.createElement('span');
+        rectangleColor.innerText = colors[i];   // display each rectangle color
+        rectangleContainer.appendChild(rectangleColor);
+
+        wrapper.appendChild(rectangleContainer);    // put rectangle container to wrapper
+        console.log(rectangleId);
+    }
+
+    let header = document.getElementsByTagName('h1')[0];   // get header element
+    let title = document.createElement('title');    // create title element
+    title.innerText = header.innerText;   // add text from header1 to title
+
+    let head = document.getElementsByTagName('head')[0];   // get head element
+    head.appendChild(title);    // put title element in head
+</script>
+</html>

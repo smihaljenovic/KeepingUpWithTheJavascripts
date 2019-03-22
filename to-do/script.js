@@ -1,7 +1,64 @@
 let signUpForm, logInForm, loginPage, dashboard, users = [], userLists = {}, formValid, loggedUser;
 
+let container_html = `<div id="container" class="container"></div>
+                      <script type="text/javascript" src="script.js"></script>`;
+let initial_html = `<div id="initial" style="display: none">
+                        <div id="errorMsg"></div>
+                        <div id="welcome">
+                            <h1>To-do list</h1>
+                            <p>This is exercise on Pirple.com class Keeping Up With the Javascripts.</p>
+                            <input type="button" value="Sign Up" onclick="showSignUp()">
+                            <input type="button" value="Log In" onclick="showLogIn()">
+            
+                            <form id="signUpForm" name="signUpForm" onsubmit="return validateSignInForm(this)" style="display: none">
+                                <label>First name:</label><input type="text" name="firstName">
+                                <label>Last name:</label><input type="text" name="lastName">
+                                <label>Email:</label><input type="text" name="email" >
+                                <label>Password:</label><input type="password" name="password">
+                                <input type="checkbox" value="I agree to the Terms of Use" name="termsOfUse"><div>I agree to the Terms of Use</div><br>
+                                <input type="submit" value="Submit">
+                            </form>
+            
+                            <form id="logInForm" name="logInForm" onsubmit="return validateLogInForm(this);" style="display: none">
+                                <label>Email:</label><input type="text" name="email">
+                                <label>Password:</label><input type="password" name="password">
+                                <input type="submit" value="Submit">
+                            </form>
+                        </div>
+                    </div>`;
+
+let dashboard_html = `<div id="dashboard" style="display: none"></div>`;
+
+let dashboardHeader_html = `<div id="dashboardHeader">
+                                <div id="title">
+                                    <h1>Dashboard</h1>
+                                </div>
+                                <div id="loggedUser">
+                                    <div id="welcomeMsg">Welcome <span id="userName"></span>!</div>
+                                    <button onclick="logOut()">Log out</button>
+                                </div>
+                            </div>`;
+
+let toDoForm_html = `<form id="toDoForm" onsubmit="return createNewList(this)">
+                        <input type="text" name="listName">
+                        <input type="submit" value="New Todo List">
+                    </form>`;
+
+let toDoLists_html = `<div id="toDoLists"></div>`;
+
+
 
 function init() {
+
+    // create html structure;
+    document.body.innerHTML = container_html;
+
+    let container = document.getElementById('container');
+    container.innerHTML = `${initial_html} ${dashboard_html}`;
+
+    dashboard = document.getElementById('dashboard');
+    dashboard.innerHTML = `${dashboardHeader_html} ${toDoForm_html} ${toDoLists_html}`;
+
 
     // initialize global values
     signUpForm = document.getElementById("signUpForm");
@@ -316,6 +373,7 @@ function itemChecked(listItem) {
 
 
 function showDashboard() {
+
     document.getElementById('userName').innerHTML = loggedUser.firstName;   // show logged user name
     dashboard.style.display = 'block';  // show dashboard
 
